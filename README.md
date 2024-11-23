@@ -20,7 +20,7 @@ Insert gif or link to demo
 ### Install Dependencies:
 
 ```bash
-  pip install pyautogui google.generativeai
+  pip install pyautogui google.generativeai pyperclip
 ```
 
 ### Setup API keys { for now we, are limited to GEMINI and LLAMA API (NIM API) }
