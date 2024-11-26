@@ -1,8 +1,8 @@
 
-# PyROMIND: LLM Orchestration and Automation System
+# Automatrix: LLM Orchestration and Automation System
 
 ### Overview
-PyROMIND is an advanced orchestration system designed to enable automated interactions and code execution on local machine using powerful LLMs like OpenAI's GPT and Meta's LLaMA. In this initial release, PyROMIND focuses on automating workflows and executing code efficiently, with a feedback loop for error handling and refinement.
+Automatrix is an advanced orchestration system designed to enable automated interactions and code execution on local machine using powerful LLMs like OpenAI's GPT and Meta's LLaMA. In this initial release, Automatixc  focuses on automating workflows and executing code efficiently, with a feedback loop for error handling and refinement.
 
 ## Demo
 
