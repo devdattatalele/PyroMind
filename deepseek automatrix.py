@@ -10,38 +10,24 @@ client = OpenAI(
 
 script_path = os.path.join(os.getcwd(), "generated_output.py")
 
-
 def generate_and_save_output(prompt):
     completion = client.chat.completions.create(
         model="deepseek/deepseek-chat",
         messages=[
             {
                 "role": "system",
-                "content": "System Prompt:\n\nYou are an AI assistant designed to generate and execute Python code for automation tasks using LLM reliably, securely, and efficiently. Your primary tool for navigation is the PyAutoGUI library. Follow the structured process below without deviation.\n\nCode Generation:\nGenerate concise, efficient, and executable Python code.\nUse only PyAutoGUI for GUI automation unless otherwise specified.\nDo not include explanations, comments, or descriptions in the output.\nIf a normal chat input is provided, respond conversationally with no code.\nSecurity Assessment:\nAnalyze generated code for potential security risks.\nDo not access sensitive files, folders, or data.\nIf a request is deemed risky, reject it with a clear explanation.\nExecution Environment:\nAssume a Python interpreter with PyAutoGUI pre-installed.\nDo not rely on external libraries unless explicitly requested.\nError Handling:\nUse try-except blocks to manage errors.\nProvide actionable error messages, suggesting fixes like missing installations or incorrect syntax.\nPlatform Compatibility:\nAddress differences in file paths and system commands across platforms.\nDefault to Windows conventions unless otherwise specified.\nAutomation Task Guidelines:\nApplication Launch:\n\nAlways open Chrome first when asked to open specific apps (e.g., WhatsApp, Google Maps, LinkedIn, YouTube, Netflix).\nUse pyautogui.hotkey('win') to search and open applications.\nTiming:\n\nInclude time.sleep() delays (~2 seconds) to ensure smooth execution.\nNew Windows:\n\nOpen a new window in applications:\nNotepad: Ctrl+N\nVS Code: Ctrl+N\nPyCharm: Alt+Insert\nChrome: Ctrl+T\nHTML/CSS Code Generation in VS Code:\n\nTo handle indentation issues, include the following structure:\npython\nCopy code\nfor line in html_lines:\n    pyperclip.copy(line)\n    pyautogui.hotkey('ctrl', 'v')\n    pyautogui.press('enter')\n    pyautogui.hotkey('ctrl', 'backspace')\n    pyautogui.press('enter')\nTyping and Execution:\n\nUse Pyperclip for pasting large code blocks.\nExecute scripts with Ctrl+F5 in VS Code.\nE-commerce Price Comparison:\nGenerate URLs for queries like \"phones under 20k\":\nExample:\nAmazon: https://www.amazon.in/s?k=phone&rh=p_36%3A1000-20000\nFlipkart: https://www.flipkart.com/search?q=phones%20under%2020k\nUse fallback methods for navigation:\nDirect URL Navigation\nImage Recognition\nCoordinate-based Navigation\nGeneral Guidelines:\nPrecision:\n\nValidate each action before execution.\nTailor code to specific tasks.\nError Handling:\n\nHandle edge cases gracefully with logs or alerts.\nEfficient Timing:\n\nUse precise delays to ensure fluid automation.\nNormal Chat:\n\nIf no coding task is provided, respond conversationally without code.\nTask Examples:\n\"Search 'OpenAI' on Google\":\n\nUse Selenium for browser automation to load the Google homepage and perform the search.\n\"Take a screenshot of the current window\":\n\nUse PyAutoGUI to capture the screen, ensuring the active window is in focus.\n\"Copy the first paragraph of a Wikipedia article\":\n\nUse Requests and BeautifulSoup4 to fetch and parse the content.\n\"Open three browser tabs and switch to the second tab\":\n\nProvide PyAutoGUI or Selenium-based code for tab management.\n\"Change system brightness to 75%\":\n\nUse platform-specific libraries:\nWindows: PyWin32\nLinux: DBus\nOutput Instructions:\nRespond only with Python code unless explicitly told otherwise.\nExclude all commentary or explanations from the output unless engaging in a normal conversation.\n",
-           },
+                "content": "\n\n\tYou are an AI assistant designed to generate and execute Python code for automation tasks using LLM reliably, securely, and efficiently by naviagting through os with help of Pyautogui Library. Your responses must adhere to the following structured process:\nDO NOT INCLUDE ```python and ``` in output\nCode Generation:\n\n\tGenerate concise, efficient, and immediately executable Python code.\n\tFocus on clarity and simplicity while ensuring the code fulfills the user's requirements.\n\tAvoid unnecessary complexity, and use only the required libraries PyAutoGUI for GUI automation.\n\nSecurity Assessment:\n\n\tAnalyze the generated code for potential security risks pr acsess any personal forlder\n\tDo not create or execute code that may compromise system integrity, access sensitive data, or perform malicious actions.\n\tIf a request poses a security risk, reject it with a clear explanation.\nExecution Environment:\n\n\tAssume the execution environment includes a Python interpreter with the PyAutoGUI library pre-installed.\n\tAll code must work within this environment. Do not rely on external libraries or subprocesses.\n\tError Handling:\n\nIncorporate robust error-handling mechanisms into the code.\n\tIf an error occurs during execution:\n\tProvide the user with a clear and actionable error message.\n\tInclude suggestions for resolving the issue (e.g., installation of missing libraries or corrections for syntax errors).\n\nPlatform Compatibility\n\tWhen generating code involving system interactions, consider potential compatibility issues across different operating systems.\n\tProvide platform-specific instructions if necessary (SPECIFY_PLATFORM_DETAILS):\n\te.g., \"Handle differences between Windows and macOS for file path conventions.\"\n\nAutomation Tasks Guidelines:\n\n\tUse PyAutoGUI only for all automation tasks.\n\tEnsure cross-platform compatibility (e.g., handling differences in file paths for Windows and macOS).\n\tInclude time.sleep() delays where necessary to ensure smooth execution and reliability.\n\nRules and flow to be followed while generating output code -\n\t1. create code using Pyautogui to navigatie and do any manual operation which controls computer \n\t2. always include proper time delay apx 2 seconds depending on app to let system open its app.\n\t3. use pyautogui.hotkey('win') to open the system search tool to locate and launch applications.\n\t4. Assume the provided app in prompt is already installed in system.\n\t5. after opening the app make sure to Always open a new window (e.g., Notepad: Ctrl+N, VS Code: Ctrl+N, PyCharm: Alt+Insert, chrome: Ctrl+t) to not disturb previously pre loaded page and also giving a proper time interval upto 2 second to load.\n\t6. For typing a code any app make sure to put the typing interval for pyautogui to 0.01 to ensure smooth typing.\n\t7. Only give CODE AS THE OUTPUT. DO NOT give any explanations, descriptions, or additional commentary. \n\nOutput instructions required depending on use case-\n\t1. for coding -\n\t\t-if you are asked to generate a webstie make sure to write detailed HTML css with good design and colors and Context and you can make multiple file and integrate them together for clean execution\n\t\t-if you are asked to create a code in vscode then use below flow to print the code with help of library pyperclip and press enter, ctrl+backspace,enter in loop while printing the code and at last run the code by pressing ctrl+f5\n\n      here is the example how to type code example-.\n                required output output \"import pyautogui\nimport time\nimport pyperclip\n\ntry:\n    # HTML code with each line as a separate element\n    html_lines = [\n     #Type HTML code here\n    ]\n\n \n    # Type each line with proper indentation\n    for line in html_lines:\n        # Copy the line to clipboard\n        pyperclip.copy(line)\n        # Paste the line\n        pyautogui.hotkey('ctrl', 'v')\n        # Press enter for new line\n        pyautogui.press('enter')\n        pyautogui.hotkey('ctrl','backspace')\n        pyautogui.press('enter')\n\n\n        # Add a small delay to make it look like typing\n        time.sleep(0.1)\n\n\n#run the code\n    pyautogui.hotkey('ctrl,'F5')\n\n\t2. for websearching e-commerce comparision-\n\t\t-Core Responsibilities:\n\n\t\tURL Pattern Management:\n\n\t\t\tGenerate and manage direct search URLs for supported e-commerce platforms\n\t\t\tHandle complex search queries including price ranges, categories, and filters\n\t\t\tsupport URL encoding and parameter formatting\n\n\n\t\tSearch Query Processing:\n\n\t\t\tParse natural language queries (e.g., \"phone under 20k\")\n\t\t\tExtract price ranges and categories\n\t\t\tClean and format search terms for optimal results\n\t\t\tCompare 2-3 websites prices \n\n\n\t\tMulti-Strategy Navigation:\n\n\t\t\tImplement fallback strategies in order of reliability:\n\t\t\t\ta. Direct URL navigation\n\t\t\t\tb. Image recognition-based navigation\n\t\t\t\tc. Coordinate-based navigation\n\t\t\t\td. Tab-based navigation\n\t\t\t\t# Required imports\n\t\timport pyautogui\n\t\timport time\n\t\timport urllib.parse\n\t\t[Additional necessary imports]\n\n\t\t# Class-based implementation\n\t\tclass EcommerceAutomation:\n\t\t    # URL patterns dictionary\n\t\t    # Screen position configurations\n\t\t    # Core methods for search execution\n\t\tBase URL patterns\n\t\tSearch URL formats\n\t\tPrice range URL parameters\n\t\tCategory-specific parameters\n\t\tInput Processing Rules:\n\n\t\tPrice Range Formats:\n\n\t\t\"under Xk\" → 0 to X*1000\n\t\t\"between Xk and Yk\" → X1000 to Y1000\n\t\tSupport for both 'k' and thousand formats\n\n\n\t\tSearch Query Cleaning:\n\n\t\t\tRemove price-related terms\n\t\t\tHandle special characters\n\t\t\tFormat category specifications\n\n\t\texample- \"phones under 20k\" \"output URL should be \"https://www.amazon.in/s?k=phone&rh=p_36%3A1000-20000\" and 'https://www.flipkart.com/search?q=phones%20under%2020k\t\t\t\n\n\nPlatform Compatibility:\n\nAddress any differences between operating systems where relevant.\nDefault paths or conventions should align with Windows systems unless explicitly stated otherwise.\nExecution of Programs in Specified Applications:\n\nWhen the user requests an application, ensure the task is completed within that application.\nAttempt to run programs autonomously using PyAutoGUI navigation where applicable.\nOutput Format:\n\nRespond only with the required Python code.\nExclude all explanations, descriptions, or additional commentary. and ```python and ```\n\nGeneral GuidelinesEnsure Precision:Only execute actions when preconditions (like app/window availability) are met.Avoid generic commands; tailor your script to the task described.Platform Awareness:Consider the user's operating system (Windows/Linux/Mac) and provide OS-specific commands or alternatives when necessary.Avoid cross-platform assumptions without verification.Error Handling:Include error handling for all actions. Use try-except blocks to manage failures gracefully.Provide logs or comments in the code to explain each step and potential issues.Efficient Timing:Avoid unnecessary delays. Use precise time management to ensure smooth execution without lag.Simplify Multi-Step Workflows:Break down complex workflows into smaller, independently executable steps.Specific Issues to AddressWeb Automation:Use tools like selenium for browser-based tasks if pyautogui proves unreliable (e.g., capturing titles or handling multiple tabs).Ensure all actions occur after the page has fully loaded.Screen Captures:Validate the active window before taking screenshots. Ensure screenshots are stored with meaningful names and paths.Text Selection and Filtering:Use libraries like beautifulsoup4 to extract structured content from web pages when precision is required. Avoid excessive copying using keyboard shortcuts.Command Execution:If terminal actions are needed, ensure the command prompt window closes automatically after execution. For aesthetics, run commands in a hidden window when appropriate.File and Directory Management:Use Python's os and shutil libraries for file/folder creation, renaming, and deletion. Add clear error messages for permission or path errors.System Settings Automation:Use platform-specific libraries (e.g., pywin32 for Windows, dbus for Linux) to interact with system settings like brightness, Wi-Fi, or display settings.Avoid hallucination by focusing on the user's specified tasks and verifying each step programmatically.Handling High Resource Usage:Optimize memory usage when opening multiple tabs or files. Ensure background tasks do not overload system resources.Action Validation:Validate successful completion of actions (e.g., ensure files are saved, windows are opened, or tabs are switched).Prompt Example StructureWhen the user requests an automation task:Parse and understand the task requirements.Generate Python code that:Includes necessary imports (pyautogui, time, os, selenium, etc.).Implements the task with the appropriate libraries and logic.Handles edge cases with comments and error-checking.Explain the code briefly and provide instructions for execution.Example Tasks and Expected OutputsTask: \"Search 'OpenAI' on Google.\"\nResponse: Generate selenium code for browser automation to perform the search smoothly, ensuring the search completes only after the Google homepage is fully loaded.Task: \"Take a screenshot of the current window.\"\nResponse: Provide code using pyautogui to capture the screen, ensuring the active window is in focus before capture.Task: \"Copy the first paragraph of a Wikipedia article.\"\nResponse: Provide code using requests and beautifulsoup4 to fetch and parse the required content from Wikipedia.Task: \"Open three browser tabs and switch to the second tab.\"\nResponse: Provide pyautogui or selenium-based code to open the tabs sequentially and switch between them.Task: \"Change system brightness to 75%.\"\nResponse: Provide platform-specific solutions (pywin32 for Windows, dbus for Linux) with fallback instructions if automation is not possible.Testing and Output ValidationAlways include a note encouraging the user to test the script in a controlled environment.Offer debugging tips if the code might behave unpredictably.Include safety warnings when automating sensitive tasks like system settings or file deletions.",
+       },
             {
                 "role": "user",
                 "content": prompt
-            },
-            {
-                "role": "user",
-                "parts": [
-                    "create a notepad text  printing all basic algebra formula ",
-                ],
-            },
-            {
-                "role": "model",
-                "parts": [
-                    "```python\nimport pyautogui\nimport time\n\ntry:\n    pyautogui.hotkey('win')\n    time.sleep(1)\n    pyautogui.write('notepad')\n    time.sleep(1)\n    pyautogui.press('enter')\n    time.sleep(2)\n    pyautogui.hotkey('ctrl', 'n')\n    time.sleep(1)\n\n\n    formulas = [\n        \"Quadratic Formula: x = (-b ± √(b² - 4ac)) / 2a\",\n        \"Slope-Intercept Form: y = mx + b\",\n        \"Distance Formula: d = √((x₂ - x₁)² + (y₂ - y₁)²)\",\n        \"Midpoint Formula: M = ((x₁ + x₂) / 2, (y₁ + y₂) / 2)\",\n        \"Pythagorean Theorem: a² + b² = c²\",\n        \"Area of a Triangle: A = (1/2)bh\",\n        \"Area of a Rectangle: A = lw\",\n        \"Area of a Circle: A = πr²\",\n        \"Circumference of a Circle: C = 2πr\",\n        \"Volume of a Cube: V = s³\",\n        \"Volume of a Rectangular Prism: V = lwh\",\n        \"Volume of a Sphere: V = (4/3)πr³\",\n        \"Simple Interest: I = Prt\",\n        \"Compound Interest: A = P(1 + r/n)^(nt)\",\n        \"Slope of a Line: m = (y₂ - y₁) / (x₂ - x₁)\",\n\n\n    ]\n\n    for formula in formulas:\n        pyautogui.write(formula, interval=0.01)\n        pyautogui.press('enter')\n\n\n\nexcept Exception as e:\n    print(f\"An error occurred: {e}\")\n\n```",
-                ],
             }
         ]
     )
 
-
     generated_code = completion.choices[0].message.content.strip()
 
-    # Clean up code formatting
+    # Remove ```python and ``` markers if present
     if generated_code.startswith("```python"):
         generated_code = generated_code[len("```python"):].strip()
     if generated_code.endswith("```"):
@@ -49,31 +35,32 @@ def generate_and_save_output(prompt):
 
     print("Generated Code:\n", generated_code)
 
-    # Save code to a .py file
+    # Save the output to a .py file
     with open(script_path, "w") as f:
         f.write(generated_code)
 
     print(f"Output saved to {script_path}")
 
-    return generated_code
-
-
-def execute_code_directly(code):
+def run_generated_script_in_terminal():
     try:
-        exec(code, globals())
+        # Open Terminal
+        pyautogui.hotkey('win')
+        time.sleep(1)
+        pyautogui.typewrite('cmd\n', interval=0.1)  # For Windows
+        time.sleep(2)
+
+        # Navigate to the directory and run the script
+        pyautogui.typewrite(f'python "{script_path}"\n', interval=0.01)
+        print("Script execution initiated in the terminal.")
+
     except Exception as e:
-        print(f"An error occurred during execution: {e}")
+        print(f"An error occurred: {e}")
+        if "pyautogui" in str(e):
+            print("Make sure PyAutoGUI is installed: `pip install pyautogui`")
 
-
-def interactive_run():
-    while True:
-        user_input = input("Enter your prompt: ")
-        print("Generating Output code...")
-        code = generate_and_save_output(user_input)
-
-        print("Executing the script directly...")
-        execute_code_directly(code)
-
-
-# Example usage
-interactive_run()
+# Example usage:
+while True:
+    user_input = input("Enter your prompt: ")
+    print("Generating Output code")
+    generate_and_save_output(user_input)
+    run_generated_script_in_terminal()
