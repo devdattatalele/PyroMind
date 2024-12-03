@@ -1,8 +1,8 @@
 
-# Automatrix: LLM Orchestration and Automation System
+# Krya.ai: LLM Orchestration and Automation System
 
 ### Overview
-Automatrix is an advanced orchestration system designed to enable automated interactions and code execution on local machine using powerful LLMs like OpenAI's GPT and Meta's LLaMA. In this initial release, Automatixc  focuses on automating workflows and executing code efficiently, with a feedback loop for error handling and refinement.
+Krya.ai is an advanced orchestration system designed to enable automated interactions and code execution on local machine using powerful LLMs like OpenAI's GPT and Meta's LLaMA. In this initial release, Automatixc  focuses on automating workflows and executing code efficiently, with a feedback loop for error handling and refinement.
 
 ## Demo
 
@@ -34,15 +34,15 @@ Insert gif or link to demo
   5. Your api key will be create, it will look like : AIzaSxxxxxxxxxxh09xxLwCA
   6. Store it safe
 
-### Clone the PyROMIND Repository:
+### Clone the Krya.ai Repository:
 
 ```bash
-  git clone https://github.com/devdattatalele/pyromind.git
-  cd pyromind
+  git clone https://github.com/devdattatalele/Krya.ai.git
+  cd Krya.ai
 ```
 ### Running the Project
 1. Open the project in your preferred code editor, e.g., VS Code.
-2. To test PyROMIND in action:
+2. To test Krya.ai in action:
 ```bash
 python src/main.py
 ```
